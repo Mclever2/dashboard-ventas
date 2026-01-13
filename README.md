@@ -41,6 +41,10 @@ En ciertos entornos de Windows la compilación puede requerir la librería query
     npm install querystring
 
 4. **Configuración de Firebase**
+Instalamos una version compatible de firebase 
+
+    npm install firebase@8.10.1 @angular/fire@6.0.4 --save
+
 El proyecto requiere las credenciales de conexión a la base de datos.
 Cree un proyecto en Firebase Console.
 Habilite Firestore Database en modo prueba.
