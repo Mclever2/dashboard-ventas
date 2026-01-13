@@ -1,3 +1,53 @@
+# LiquiData Analytics
+
+LiquiData Analytics es una plataforma de visualización de datos en tiempo real diseñada para el monitoreo de ventas en el sector de bebidas. El sistema permite la gestión de indicadores comerciales bajo dos dimensiones principales que son Categoría y Marca.
+
+El objetivo principal de la aplicación es proporcionar una interfaz reactiva donde la entrada de datos impacta inmediatamente en la visualización gráfica. El usuario puede registrar ventas nuevas mediante un formulario dedicado y analizar el rendimiento a través de filtros dinámicos. Por ejemplo al seleccionar la categoría Aguas el sistema restringe automáticamente las opciones de marcas a San Luis y San Mateo asegurando la integridad de los datos visualizados.
+
+Stack Tecnológico
+El proyecto está construido sobre una arquitectura robusta utilizando versiones específicas para garantizar estabilidad y compatibilidad empresarial.
+
+Framework Frontend: Angular 9.0.7
+
+Lenguaje: TypeScript
+
+Interfaz de Usuario: Ng-Zorro Ant Design
+
+Visualización de Datos: G2Plot
+
+Backend y Persistencia: Firebase Firestore
+
+Modelado de Datos: FireORM
+
+Entorno de Ejecución: Node.js 12.22.9
+
+Guía de Configuración del Entorno
+Debido a que este proyecto utiliza Angular 9 es estricto el uso de una versión compatible de Node.js para evitar errores de compilación relacionados con node-sass y otras dependencias nativas. Siga estos pasos secuenciales para replicar el entorno de desarrollo correctamente.
+
+1. **Gestión de Versiones de Node**
+El proyecto no funcionará con versiones actuales de Node como la v20 o v22. Es necesario utilizar nvm para gestionar la versión.
+
+    nvm install 12.22.9
+    nvm use 12.22.9
+
+2. **Instalación de Dependencias**
+Una vez activo Node 12 proceda a instalar las librerías del proyecto.
+
+    npm install
+
+3. **Corrección de Compatibilidad**
+En ciertos entornos de Windows la compilación puede requerir la librería querystring de forma explícita. Ejecute el siguiente comando para asegurar la estabilidad del servidor de desarrollo.
+
+    npm install querystring
+
+4. **Configuración de Firebase**
+El proyecto requiere las credenciales de conexión a la base de datos.
+Cree un proyecto en Firebase Console.
+Habilite Firestore Database en modo prueba.
+Copie las credenciales de configuración web.
+Pegue las credenciales en el archivo src/environments/environment.ts.
+
+
 # DashboardVentas
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
