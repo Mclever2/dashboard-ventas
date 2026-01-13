@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class AppComponent {
   isCollapsed = false;
-  constructor(private firestore: AngularFirestore) {
-    this.firestore.collection('test').add({ hola: 'mundo', fecha: new Date() })
-      .then(() => console.log('Conexión a Firebase EXITOSA!'))
-      .catch(err => console.error('Error de conexión:', err));
+  constructor(private dataService: DataService) {
+    // DESCOMENTAR ESTA LINEA UNA SOLA VEZ, GUARDAR, ESPERAR LA CONSOLA Y LUEGO COMENTAR DE NUEVO
+    //this.dataService.seedDatabase(); 
   }
 }
