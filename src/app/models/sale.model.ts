@@ -1,7 +1,7 @@
 export interface Sale {
   id?: string;
-  amount: number;       // Venta total en soles
-  quantity: number;     // Cantidad de unidades vendidas
+  amount: number;       
+  quantity: number;     
   date: Date;           
   productName: string;  
   category: string;     

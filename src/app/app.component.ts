@@ -15,7 +15,6 @@ export class AppComponent {
 
   async loginConGoogle() {
     try {
-      // Abrirá la ventana emergente de Google
       const res = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
       console.log('Login exitoso:', res.user?.displayName);
     } catch (error) {
@@ -27,7 +26,6 @@ export class AppComponent {
     this.afAuth.signOut();
   }
 
-  // Descarga todo el dataset de ventas como CSV al hacer click en 'Reportes' del menú lateral
   downloadAllCsv() {
     this.dataService.getSales().pipe(take(1)).subscribe((sales: any[]) => {
       const headers = ['ID','Fecha','Producto','Categoría','Marca','Cantidad','Monto'];
@@ -46,7 +44,7 @@ export class AppComponent {
       URL.revokeObjectURL(url);
     }, err => {
       console.error('Error fetching sales for CSV:', err);
-      // Silencioso por ahora; podríamos mostrar mensaje si quieres
+
     });
   }
 }
