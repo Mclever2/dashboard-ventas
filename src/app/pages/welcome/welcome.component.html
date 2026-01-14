@@ -1,0 +1,57 @@
+<div class="dashboard-wrapper">
+  
+  <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+    <h2 style="margin: 0;">Panel de Ventas</h2>
+    <div style="display:flex; gap: 8px;">
+      <!-- Botón movido al menú lateral -->
+    </div>
+  </div>
+
+  <div class="filters-container">
+    <nz-card nzTitle="Filtros de Control">
+      <div nz-row [nzGutter]="16">
+
+        <div nz-col class="gutter-row" [nzSpan]="12">
+          <label>Categoría:</label>
+          <nz-select 
+            style="width: 100%;" 
+            nzPlaceHolder="Selecciona Categoría" 
+            [(ngModel)]="selectedCategory"
+            (ngModelChange)="onCategoryChange($event)">
+            <nz-option nzValue="Todo" nzLabel="Todo"></nz-option>
+            <nz-option nzValue="Gaseosas" nzLabel="Gaseosas"></nz-option>
+            <nz-option nzValue="Aguas" nzLabel="Aguas"></nz-option>
+          </nz-select>
+        </div>
+
+        <div nz-col class="gutter-row" [nzSpan]="12">
+          <label>Marca:</label>
+          <nz-select 
+            style="width: 100%;" 
+            nzPlaceHolder="Selecciona una Marca" 
+            [(ngModel)]="selectedBrand"
+            (ngModelChange)="onBrandChange($event)"
+            [nzDisabled]="!selectedCategory || selectedCategory === 'Todo'">
+            <nz-option nzValue="Todo" nzLabel="Todo"></nz-option>
+            <nz-option *ngFor="let brand of brands" [nzValue]="brand" [nzLabel]="brand"></nz-option>
+          </nz-select>
+        </div>
+
+      </div>
+    </nz-card>
+  </div>
+
+  <div class="chart-container" style="margin-top: 20px; display: grid; grid-template-rows: auto auto; gap: 16px;">
+    <nz-card nzTitle="Cantidad vendida por Categoría">
+      <div id="container-quantity" style="height: 300px; width: 100%;"></div>
+    </nz-card>
+
+    <nz-card nzTitle="Venta total (S/) por Categoría">
+      <div id="container-amount" style="height: 300px; width: 100%;"></div>
+    </nz-card>
+
+    <!-- Fallback table -->
+    <div id="chart-data-list" style="display:none; margin-top: 10px;"></div>
+  </div>
+
+</div>

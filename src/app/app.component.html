@@ -6,48 +6,69 @@
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
     <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
+      <a href="#" target="_blank">
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
+        <h1>Tiendita de Don Pepe</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+      <li nz-submenu nzOpen nzTitle="Opciones" nzIcon="menu">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
+            <a routerLink="/welcome">Dashboard</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
+            <a routerLink="/add-sale">Agregar Nueva Venta</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
+            <a (click)="downloadAllCsv()" style="cursor: pointer;" title="Descargar CSV">Descargar Reporte CSV</a>
           </li>
         </ul>
       </li>
     </ul>
   </nz-sider>
+
   <nz-layout>
     <nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <i class="trigger"
-               nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></i>
+          <i class="trigger"
+             nz-icon
+             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'">
+          </i>
         </span>
+
+        <div class="auth-section" style="float: right; margin-right: 24px;">
+          <ng-container *ngIf="afAuth.user | async as user; else loginBtn">
+            <span style="margin-right: 15px;">
+              Bienvenido, <strong>{{ user.displayName }}</strong>
+            </span>
+            <button nz-button nzType="default" nzDanger (click)="logout()">
+              <i nz-icon nzType="logout"></i> Salir
+            </button>
+          </ng-container>
+
+          <ng-template #loginBtn>
+            <button nz-button nzType="primary" (click)="loginConGoogle()">
+              <i nz-icon nzType="google"></i> Iniciar Sesión
+            </button>
+          </ng-template>
+        </div>
       </div>
     </nz-header>
+
     <nz-content>
       <div class="inner-content">
-        <router-outlet></router-outlet>
+        <ng-container *ngIf="afAuth.user | async; else pleaseLogin">
+          <router-outlet></router-outlet>
+        </ng-container>
+
+        <ng-template #pleaseLogin>
+          <div style="text-align: center; margin-top: 100px;">
+            <nz-result nzStatus="403" nzTitle="Acceso Restringido" nzSubTitle="Por favor, inicia sesión con Google para gestionar las ventas.">
+            </nz-result>
+          </div>
+        </ng-template>
       </div>
     </nz-content>
   </nz-layout>

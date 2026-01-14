@@ -1,0 +1,8 @@
+{
+  // Usar la versión de TypeScript instalada en el proyecto (workspace)
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Recomendaciones útiles
+  "extensions.ignoreRecommendations": false
+}

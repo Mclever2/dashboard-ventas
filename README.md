@@ -45,13 +45,6 @@ Instalamos una version compatible de firebase
 
     npm install firebase@8.10.1 @angular/fire@6.0.4 --save
 
-El proyecto requiere las credenciales de conexión a la base de datos.
-Cree un proyecto en Firebase Console.
-Habilite Firestore Database en modo prueba.
-Copie las credenciales de configuración web.
-Pegue las credenciales en el archivo src/environments/environment.ts.
-
-
 # DashboardVentas
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
