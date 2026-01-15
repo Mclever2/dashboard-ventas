@@ -58,7 +58,7 @@ export class AddSaleComponent implements OnInit {
   }
 
   onBrandChange(brand: string): void {
-    // Auto-fill the product name based on the selected brand
+
     const product = this.products.find(p => p.brand === brand);
     if (product) {
       this.saleForm.patchValue({ productName: product.name });
@@ -74,7 +74,7 @@ export class AddSaleComponent implements OnInit {
     this.loading = true;
     const formValue = this.saleForm.getRawValue();
 
-    // Call backend mutation addSale
+
     this.dataService.addSale({
       id: '',
       amount: parseFloat(formValue.amount),
