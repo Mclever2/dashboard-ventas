@@ -20,8 +20,15 @@
     "@angular/platform-browser": "~9.0.7",
     "@angular/platform-browser-dynamic": "~9.0.7",
     "@angular/router": "~9.0.7",
-    "@antv/g2plot": "^2.4.35",
+    "@antv/g2plot": "^2.0.10",
+    "apollo-angular": "^1.9.1",
+    "apollo-angular-link-http": "^1.10.0",
+    "apollo-cache-inmemory": "^1.6.0",
+    "apollo-client": "^2.6.0",
+    "apollo-link": "^1.2.11",
     "firebase": "^8.10.1",
+    "graphql": "^14.6.0",
+    "graphql-tag": "^2.10.0",
     "ng-zorro-antd": "^9.3.0",
     "querystring": "^0.2.1",
     "rxjs": "~6.5.4",
@@ -48,6 +55,6 @@
     "protractor": "~5.4.3",
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
-    "typescript": "~3.7.5"
+    "typescript": "^3.7.7"
   }
 }

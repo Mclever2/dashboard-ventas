@@ -13,11 +13,19 @@
     "target": "es2015",
     "lib": [
       "es2018",
-      "dom"
-    ]
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "skipLibCheck": true,
+    "paths": {
+      "@antv/g2plot": ["src/typings/stubs/@antv/g2plot"],
+      "@antv/g2": ["src/typings/stubs/@antv/g2"],
+      "@antv/util": ["src/typings/stubs/@antv/util"],
+      "@antv/component": ["src/typings/stubs/@antv/component"]
+    }
   },
   "angularCompilerOptions": {
-    "enableIvy": false,
+    "enableIvy": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }

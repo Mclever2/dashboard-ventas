@@ -1,0 +1,150 @@
+<nz-layout>
+  <nz-content style="padding: 50px;">
+    <div class="container">
+      <nz-card 
+        nzTitle="Agregar Nueva Venta" 
+        [nzExtra]="extraTemplate"
+        [nzBordered]="true"
+        style="max-width: 600px; margin: 0 auto;">
+        
+        <form [formGroup]="saleForm" (ngSubmit)="submitForm()">
+          
+          <!-- Categoría -->
+          <div nz-row nzGutter="24" style="margin-bottom: 20px;">
+            <div nz-col nzSpan="24">
+              <label style="font-weight: 500; margin-bottom: 8px; display: block;">
+                Categoría <span style="color: red;">*</span>
+              </label>
+              <nz-select 
+                formControlName="category"
+                nzPlaceHolder="Selecciona una categoría"
+                (ngModelChange)="onCategoryChange($event)">
+                <nz-option *ngFor="let cat of categories" nzValue="{{cat}}" nzLabel="{{cat}}"></nz-option>
+              </nz-select>
+              <div *ngIf="saleForm.get('category')?.invalid && saleForm.get('category')?.touched" 
+                   style="color: red; font-size: 12px; margin-top: 5px;">
+                Categoría es requerida
+              </div>
+            </div>
+          </div>
+
+          <!-- Marca -->
+          <div nz-row nzGutter="24" style="margin-bottom: 20px;">
+            <div nz-col nzSpan="24">
+              <label style="font-weight: 500; margin-bottom: 8px; display: block;">
+                Marca <span style="color: red;">*</span>
+              </label>
+              <nz-select 
+                formControlName="brand"
+                nzPlaceHolder="Selecciona una marca"
+                (ngModelChange)="onBrandChange($event)">
+                <nz-option *ngFor="let brand of availableBrands" nzValue="{{brand}}" nzLabel="{{brand}}"></nz-option>
+              </nz-select>
+              <div *ngIf="saleForm.get('brand')?.invalid && saleForm.get('brand')?.touched" 
+                   style="color: red; font-size: 12px; margin-top: 5px;">
+                Marca es requerida
+              </div>
+            </div>
+          </div>
+
+          <!-- Producto -->
+          <div nz-row nzGutter="24" style="margin-bottom: 20px;">
+            <div nz-col nzSpan="24">
+              <label style="font-weight: 500; margin-bottom: 8px; display: block;">
+                Producto <span style="color: red;">*</span>
+              </label>
+              <input 
+                nz-input 
+                formControlName="productName" 
+                placeholder="Se auto-completa al seleccionar marca"
+                readonly>
+              <div *ngIf="saleForm.get('productName')?.invalid && saleForm.get('productName')?.touched" 
+                   style="color: red; font-size: 12px; margin-top: 5px;">
+                Producto es requerido
+              </div>
+            </div>
+          </div>
+
+          <!-- Cantidad -->
+          <div nz-row nzGutter="24" style="margin-bottom: 20px;">
+            <div nz-col nzSpan="24">
+              <label style="font-weight: 500; margin-bottom: 8px; display: block;">
+                Cantidad <span style="color: red;">*</span>
+              </label>
+              <input 
+                nz-input 
+                type="number" 
+                formControlName="quantity" 
+                placeholder="Ingresa la cantidad"
+                min="1">
+              <div *ngIf="saleForm.get('quantity')?.invalid && saleForm.get('quantity')?.touched" 
+                   style="color: red; font-size: 12px; margin-top: 5px;">
+                Ingresa una cantidad válida (>= 1)
+              </div>
+            </div>
+          </div>
+
+          <!-- Monto de venta -->
+          <div nz-row nzGutter="24" style="margin-bottom: 20px;">
+            <div nz-col nzSpan="24">
+              <label style="font-weight: 500; margin-bottom: 8px; display: block;">
+                Monto de Venta (S/.) <span style="color: red;">*</span>
+              </label>
+              <input 
+                nz-input 
+                type="number" 
+                formControlName="amount" 
+                placeholder="Ingresa el monto"
+                step="0.01"
+                min="0">
+              <div *ngIf="saleForm.get('amount')?.invalid && saleForm.get('amount')?.touched" 
+                   style="color: red; font-size: 12px; margin-top: 5px;">
+                Ingresa un monto válido (mayor a 0)
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones -->
+          <div nz-row nzGutter="24" style="margin-top: 30px;">
+            <div nz-col nzSpan="12">
+              <button 
+                nz-button 
+                nzType="primary" 
+                nzSize="large"
+                [disabled]="loading"
+                [nzLoading]="loading"
+                style="width: 100%;"
+                type="submit">
+                Agregar Venta
+              </button>
+            </div>
+            <div nz-col nzSpan="12">
+              <button 
+                nz-button 
+                nzSize="large"
+                style="width: 100%;"
+                type="button"
+                (click)="resetForm()">
+                Limpiar
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </nz-card>
+
+      <ng-template #extraTemplate>
+        <a href="#" routerLink="/welcome" style="color: #1890ff;">← Volver al Gráfico</a>
+      </ng-template>
+    </div>
+  </nz-content>
+</nz-layout>
+
+<style>
+  .container {
+    width: 100%;
+  }
+  nz-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+</style>

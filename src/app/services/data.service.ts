@@ -1,45 +1,82 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Product } from '../models/product.model';
-import { Sale } from '../models/sale.model';
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
 import { map } from 'rxjs/operators';
+import { Sale } from '../models/sale.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private apollo: Apollo) { }
 
   getProducts() {
-    return this.firestore.collection<Product>('products').snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Product;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
-  }
-  addSale(sale: Sale) {
-
-    return this.firestore.collection('sales').add(sale);
+    return this.apollo.watchQuery({
+      query: gql`
+        query {
+          getProducts {
+            id
+            name
+            category
+            brand
+          }
+        }
+      `
+    }).valueChanges.pipe(map((result: any) => result.data.getProducts));
   }
 
   getSales() {
-    return this.firestore.collection<Sale>('sales', ref => ref.orderBy('date')).valueChanges();
+    return this.apollo.watchQuery({
+      query: gql`
+        query {
+          getSales {
+            id
+            amount
+            quantity
+            date
+            productName
+            category
+            brand
+          }
+        }
+      `,
+      pollInterval: 1000,
+      errorPolicy: 'all'
+    }).valueChanges.pipe(map((result: any) => (result && result.data && result.data.getSales) ? result.data.getSales : []));
   }
 
-  async seedDatabase() {
-    const products: Product[] = [
-      { name: 'Coca Cola Original', category: 'Gaseosas', brand: 'Coca Cola' },
-      { name: 'Pepsi Regular', category: 'Gaseosas', brand: 'Pepsi' },
-      { name: 'San Luis S/Gas', category: 'Aguas', brand: 'San Luis' },
-      { name: 'San Mateo C/Gas', category: 'Aguas', brand: 'San Mateo' }
-    ];
-
-    for (const p of products) {
-      await this.firestore.collection('products').add(p);
-    }
-    console.log('Base de datos poblada con productos iniciales');
+  addSale(sale: Sale) {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation($amount: Float!, $quantity: Int!, $productName: String!, $category: String!, $brand: String!) {
+          addSale(amount: $amount, quantity: $quantity, productName: $productName, category: $category, brand: $brand) {
+            id
+          }
+        }
+      `,
+      variables: {
+        amount: Number(sale.amount),
+        quantity: Number(sale.quantity),
+        productName: sale.productName,
+        category: sale.category,
+        brand: sale.brand
+      },
+      refetchQueries: [{
+        query: gql`
+          query {
+            getSales {
+              id
+              amount
+              quantity
+              date
+              productName
+              category
+              brand
+            }
+          }
+        `
+      }]
+    });
   }
 }
