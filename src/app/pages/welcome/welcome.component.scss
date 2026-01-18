@@ -1,0 +1,75 @@
+// Contenedor principal con un poco de padding
+.welcome-container {
+  padding: 24px;
+  background-color: #f5f7fa; // Un gris muy suave de fondo para resaltar las tarjetas
+  min-height: 100vh;
+}
+
+// Estilo de la tarjeta de filtros
+.filter-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); // Sombra elegante y suave
+  margin-bottom: 30px;
+  background: #ffffff;
+
+  // El título "Panel de Control"
+  .section-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f1f1f;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+      color: #1890ff; // Color azul corporativo
+    }
+  }
+}
+
+// Wrapper para cada input (Label + Select)
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0; // Reset
+  
+  // Ajuste para móviles
+  @media (max-width: 768px) {
+    margin-bottom: 16px;
+  }
+
+  .input-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #8c8c8c;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .custom-select {
+    width: 100%;
+    // NG-ZORRO override para bordes más suaves
+    ::ng-deep .ant-select-selector {
+      border-radius: 8px !important;
+    }
+  }
+}
+
+// Sección del gráfico
+.chart-wrapper {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+  .chart-subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #595959;
+    margin-bottom: 20px;
+    border-left: 4px solid #1890ff; // Pequeño detalle visual a la izquierda
+    padding-left: 12px;
+  }
+}

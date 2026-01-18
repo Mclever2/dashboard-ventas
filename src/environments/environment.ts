@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "",
+    apiKey: "AIzaSyDfQASE3lK_2VH_I0cAobU6w3R3yYx9urI",
     authDomain: "dashboard-ventas-ca4ef.firebaseapp.com",
     projectId: "dashboard-ventas-ca4ef",
     storageBucket: "dashboard-ventas-ca4ef.firebasestorage.app",

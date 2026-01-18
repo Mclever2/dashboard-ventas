@@ -13,6 +13,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 
+import { SalesChartModule } from '../../components/sales-chart/sales-chart.module';
+
 @NgModule({
   imports: [
     CommonModule, 
@@ -23,7 +25,8 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     NzGridModule,
     NzCardModule,
     NzButtonModule,
-    NzMessageModule
+    NzMessageModule,
+    SalesChartModule
   ],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent]
